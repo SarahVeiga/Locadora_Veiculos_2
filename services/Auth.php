@@ -73,6 +73,19 @@ class Auth{
 
     // Verificar se o usuário está logado
     public static function verificarLogin():bool{
+        return isset($_SESSION['auth']) && $_SESSION ['auth']['perfil'] === true;
+    }
 
+    public static function isPerfil(string $perfil): bool{
+        return isset($_SESSION['auth']) && $_SESSION ['auth']['perfil'] === $perfil;
+    }
+
+    public static function isAdmin():bool {
+        return self::isPerfil('admin');
+    }
+
+    public static function getUsuario(): ?array {
+        // Retorna os dados da sessao ou nulo se não existir
+        return $_SESSION['auth'] ?? null;
     }
 }
