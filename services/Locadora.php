@@ -51,5 +51,21 @@ class Locadora {
 
             file_put_contents(ARQUIVO_JSON, json_encode($dados, JSON_PRETTY_PRINT));
         }
+
+        // Adicionar novo veículo 
+        public function adicionarVeiculos(Veiculo $veiculo): void{
+            $this->veiculos[] = $veiculo;
+            $this->salvarVeiculos();
+        }
+
+        //Remover veículo
+
+        // Alugar veículo
+
+        // Devolver veículo
+
+        // Retorna a lista de veículos
+
+        // Calcular previsão do valor
     }
 }
