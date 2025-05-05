@@ -60,13 +60,73 @@ class Locadora {
         }
 
         //Remover veículo
+        public function deletarVeiculo(string $modelo, string $placa): string{
 
-        // Alugar veículo
+            foreach ($this->veiculos as $key => $veiculo){
+
+                // Verifica se o modelo e a placa correspondem
+                if($veiculo->getModelo() === $modelo && $veiculo->getPlaca() ===$placa){
+                    // Remove o veículo do array
+                    unset($this->veiculos[$key]);
+
+                    // Reogarnizar os indíces
+                    $this->veiculos = array_values($this->veiculos);
+
+                    // Salvar o novo estado
+                    $this->SalvarVeiculos();
+                    return "Veículo '{$modelo}' removido com sucesso!";
+                }
+            }
+            return "Veículo não encontrado!";
+        }
+
+        // Alugar veículo por n dias
+        public function alugarVeiculo(string $modelo, int $dias = 1): string{
+
+            // Percorre a lista de veículos
+            foreach($this->veiculos as $veiculo){
+
+                if($veiculo->getModelo() === $modelo && $veiculo->isDisponivel()){
+
+                    // Calcular valor do aluguel
+                    $valorAluguel = $veiculo->calcularAluguel($dias);
+
+                    // Marcar com alugado/indisponível
+                    $mensagem = $veiculo->alugar();
+
+                    $this->salvarVeiculos();
+
+                    return $mensagem . "Valor do aluguel: R$" . number_format($valorAluguel, 2,',','.');
+                }
+            }
+            return "Veículo não disponível";
+        }
 
         // Devolver veículo
 
+        public function devolverVeiculo(string $modelo) :string{
+
+            // Percorrer a lista
+            foreach($this->veiculos as $veiculo){
+
+                if($veiculo->getModelo() === $modelo && !$veiculo->isDisponivel()){
+
+                    // Disponibilizar o Veículo
+                    $mensagem = $veiculo->devolver();
+
+                    $this->salvarVeiculos();
+                    return $mensagem;
+                }
+            }
+            return "Veiculo já disponível ou não encontrado.";
+        }
+
         // Retorna a lista de veículos
 
+        public function listarVeiculos():array{
+            return $this->veiculos;
+        }
+
         // Calcular previsão do valor
-    
+        
 }
