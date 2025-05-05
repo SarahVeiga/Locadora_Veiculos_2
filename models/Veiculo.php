@@ -15,7 +15,7 @@ abstract class Veiculo {
      }
 
      // Função para cálculo de aluguel 
-     abstract public function calcularAlguel(int $dias) : float;
+     abstract public function calcularAluguel(int $dias) : float;
     
      public function isDisponivel():bool {
         return $this->disponivel;
