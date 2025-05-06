@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $mensagem = 'Falha ao executar o login! Verifique se o usuário e a senha estão corretos.';
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -73,14 +74,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         <div class="card">
             <!-- Título do card -->
             <div class="card-header">
-                <h4 class="mb-1">Login</h4>
+                <h4 class="mb-0">Login</h4>
             </div>
 
             <!-- Corpo do card -->
             <div class="card-body">
 
-                <form action="post" class="needs-validation" novalidate>
-                    <input type="hidden">
+            <?php if ($mensagem): ?>
+                <div class="alert alert-danger"><?=htmlspecialchars($mensagem) ?></div>
+                <?php endif; ?>
+
+                <form method="post" class="needs-validation" novalidate>
+                
 
                     <div class="mb-3">
                         <label for="user" class="form-label">
