@@ -166,7 +166,7 @@ $usuario = Auth::getUsuario();
             <div class="col-<?=Auth::isAdmin() ? 'md-6' : 'md-12'?>">
                 <div class="card h-100">
                     <div class="card-header">
-                        <h4 class="mb-0">Calcular a previsão de aluguel 💵</h4>
+                        <h4 class="mb-0">Calcular a previsão de aluguel 💰</h4>
                     </div>
                     <div class="card-body">
                         <form action="" class="needs-validation" novalidate>
@@ -201,7 +201,7 @@ $usuario = Auth::getUsuario();
                 <div class="card">
                     <div class="card-header">
                         <h4 class="mb-0">
-                            Veículos Cadastrados 🚐
+                            Veículos Cadastrados 🚗
                         </h4>
                     </div>
                     <div class="card-body">
@@ -268,6 +268,9 @@ $usuario = Auth::getUsuario();
             </div>
         </div>
     </div>
+    <!-- Bootstrap JS -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>
+</html>
