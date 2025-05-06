@@ -1,28 +1,28 @@
 <?php
 
 // Incluir o autoload
-require_once __DIR__ .'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Incluir o arquivo com as variáveis
-require_once __DIR__ .'/../config/config.php';
+require_once __DIR__ . '/../config/config.php';
 
 session_start();
 
-// Importar as classe Locadora e Auth
+// Importar as classes Locadora e Auth
 use Services\{Locadora, Auth};
 
-// Importar as classes Carro e Moto
+// Importar as classes Carro e moto
 use Models\{Carro, Moto};
 
-// Verifica se o usuário está logado 
+// Verificar se o usuário está logado
 if(!Auth::verificarLogin()){
     header('Location: login.php');
     exit;
 }
 
 // Condição para logout
-if(isset($_GET['logout'])){
-    (new Auth())->Logout();
+if (isset($_GET['logout'])){
+    (new Auth())->logout();
     header('Location: login.php');
     exit;
 }
@@ -34,12 +34,12 @@ $mensagem = '';
 
 $usuario = Auth::getUsuario();
 
-// Verifica os dados do formulãrio via POST
+// Verificar os dados do formulário via POST
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    // Verificar se requer permissão do administrador
-    if(isset($_POST['adicionar']) || isset($_POST['deletar']) || isset($_POST['devolver'])){
-        
+    // Verificar se requer permissão de administrador
+    if(isset($_POST['adicionar']) || isset($_POST['deletar']) || isset($_POST['alugar']) ||isset($_POST['devolver'])){
+
         if(!Auth::isAdmin()){
             $mensagem = "Você não tem permissão para realizar essa ação.";
             goto renderizar;
@@ -52,9 +52,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $tipo = $_POST['tipo'];
 
         $veiculo = ($tipo == 'Carro') ? new Carro($modelo, $placa) : new Moto($modelo, $placa);
-        
+
         $locadora->adicionarVeiculo($veiculo);
-        
+
         $mensagem = "Veículo adicionado com sucesso!";
     }
     elseif(isset($_POST['alugar'])){
@@ -73,10 +73,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $tipo = $_POST['tipo_calculo'];
         $valor = $locadora->calcularPrevisaoAluguel($dias, $tipo);
 
-        $mensagem = "Previsão de valor para {$dias} dias: R$ " . number_format($valor, 2, ',','.');
-    }
-
+        $mensagem = "Previsão de valor para {$dias} dias: R$ " . number_format($valor, 2, ',', '.');
+    }    
 }
+
 renderizar:
-require_once __DIR__ .'/../views/template.php';
-?>
+require_once __DIR__ . '/../views/template.php';

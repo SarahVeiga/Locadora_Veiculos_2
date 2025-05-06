@@ -16,6 +16,11 @@
         "modelo": "bIS",
         "placa": "CCC7C94",
         "disponivel": true
+    },
+    {
+        "tipo": "Carro",
+        "modelo": "aa",
+        "placa": "aaa",
+        "disponivel": true
     }
-
 ]
