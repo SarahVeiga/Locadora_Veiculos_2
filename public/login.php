@@ -31,7 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $username = $_POST['username'] ?? '';
 
     $password = $_POST['password'] ?? '';
-    
+
+    if($auth->login($username, $password)){
+        // Se o login for correto direciona para página inicial
+        header('Location: index.php');
+        exit;
+
+    } else {
+        $mensagem = 'Falha ao executar o login! Verifique se o usuário e a senha estão corretos.';
+    }
 }
 ?>
 
