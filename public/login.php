@@ -28,7 +28,10 @@ if(Auth::verificarLogin()){
 // Verificar se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    $username = $_POST['']
+    $username = $_POST['username'] ?? '';
+
+    $password = $_POST['password'] ?? '';
+    
 }
 ?>
 
